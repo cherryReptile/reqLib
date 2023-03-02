@@ -1,5 +1,6 @@
 {
     "name": "cherryreptile/logger",
+    "description": "package for do request to logger app",
     "type": "library",
     "autoload": {
         "psr-4": {
