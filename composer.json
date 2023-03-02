@@ -1,0 +1,17 @@
+{
+    "name": "cherryreptile/logger",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Cherryreptile\\Logger\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "cherryReptile"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^7.0"
+    }
+}
