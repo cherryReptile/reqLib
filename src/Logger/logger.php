@@ -7,7 +7,7 @@ use GuzzleHttp\Exception\GuzzleException;
 use Psr\Http\Message\ResponseInterface;
 use RequestToAppException\RequestToAppException;
 
-class Logger
+class Handler
 {
     public string $token;
 
