@@ -11,6 +11,7 @@ class Handler
 {
     public string $token;
     public string $url;
+    public string $wrap = 'data';
 
     public function __construct(string $token, string $url)
     {
@@ -25,6 +26,7 @@ class Handler
     {
         $fields = $this->checkType($data);
         $fields['calling_on_line'] = debug_backtrace()[0]['line'];
+        $fields['file_where_calling'] = debug_backtrace()[0]['file'];
         return $this->requestToApp($fields, 'info');
     }
 
@@ -35,6 +37,7 @@ class Handler
     {
         $fields = $this->checkType($data);
         $fields['calling_on_line'] = debug_backtrace()[0]['line'];
+        $fields['file_where_calling'] = debug_backtrace()[0]['file'];
         return $this->requestToApp($fields, 'fatal');
     }
 
@@ -45,6 +48,7 @@ class Handler
     {
         $fields = $this->checkType($data);
         $fields['calling_on_line'] = debug_backtrace()[0]['line'];
+        $fields['file_where_calling'] = debug_backtrace()[0]['file'];
         return $this->requestToApp($fields, 'error');
     }
 
@@ -55,6 +59,7 @@ class Handler
     {
         $fields = $this->checkType($data);
         $fields['calling_on_line'] = debug_backtrace()[0]['line'];
+        $fields['file_where_calling'] = debug_backtrace()[0]['file'];
         return $this->requestToApp($fields, 'warn');
     }
 
@@ -81,7 +86,7 @@ class Handler
         return [
             'changed_properties' => $changedProps,
             'all_properties' => $propsList,
-            'file' => $reflect->getFileName(),
+            'file_where_defined' => $reflect->getFileName(),
             'class' => $reflect->getName()
         ];
     }
@@ -92,9 +97,11 @@ class Handler
             return $this->objectInfo($data);
         }
 
-        return [
-            'data' => $data,
-        ];
+        if ($this->wrap === '') {
+            return [$data];
+        }
+
+        return [$this->wrap => $data];
     }
 
     /**
