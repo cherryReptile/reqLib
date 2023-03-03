@@ -10,10 +10,12 @@ use RequestToAppException\RequestToAppException;
 class Handler
 {
     public string $token;
+    public string $url;
 
-    public function __construct(string $token)
+    public function __construct(string $token, string $url)
     {
         $this->token = $token;
+        $this->url = $url;
     }
 
     /**
@@ -106,7 +108,7 @@ class Handler
         ]);
 
         try {
-            $res = $client->request('POST', "http://ww.loc/api/log/$level", $data);
+            $res = $client->request('POST', "$this->url/$level", $data);
         } catch (GuzzleException $e) {
             throw new RequestToAppException("guzzle: {$e->getMessage()}\nrequest: failed to do request to app");
         }
