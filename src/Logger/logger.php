@@ -108,7 +108,9 @@ class Handler
         ]);
 
         try {
-            $res = $client->request('POST', "$this->url/$level", $data);
+            $res = $client->request('POST', "$this->url/$level", [
+                'form_params' => $data,
+            ]);
         } catch (GuzzleException $e) {
             throw new RequestToAppException("guzzle: {$e->getMessage()}\nrequest: failed to do request to app");
         }
