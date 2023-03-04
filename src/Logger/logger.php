@@ -25,8 +25,9 @@ class Handler
     public function logINFO(mixed $data): ResponseInterface
     {
         $fields = $this->checkType($data);
-        $fields['calling_on_line'] = debug_backtrace()[0]['line'];
-        $fields['file_where_calling'] = debug_backtrace()[0]['file'];
+        $backtrace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0];
+        $fields['calling_on_line'] = $backtrace['line'];
+        $fields['file_where_calling'] = $backtrace['file'];
         return $this->requestToApp($fields, 'info');
     }
 
@@ -36,8 +37,9 @@ class Handler
     public function logFATAL(mixed $data): ResponseInterface
     {
         $fields = $this->checkType($data);
-        $fields['calling_on_line'] = debug_backtrace()[0]['line'];
-        $fields['file_where_calling'] = debug_backtrace()[0]['file'];
+        $backtrace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0];
+        $fields['calling_on_line'] = $backtrace['line'];
+        $fields['file_where_calling'] = $backtrace['file'];
         return $this->requestToApp($fields, 'fatal');
     }
 
@@ -47,8 +49,9 @@ class Handler
     public function logERROR(mixed $data): ResponseInterface
     {
         $fields = $this->checkType($data);
-        $fields['calling_on_line'] = debug_backtrace()[0]['line'];
-        $fields['file_where_calling'] = debug_backtrace()[0]['file'];
+        $backtrace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0];
+        $fields['calling_on_line'] = $backtrace['line'];
+        $fields['file_where_calling'] = $backtrace['file'];
         return $this->requestToApp($fields, 'error');
     }
 
@@ -58,8 +61,9 @@ class Handler
     public function logWARN(mixed $data): ResponseInterface
     {
         $fields = $this->checkType($data);
-        $fields['calling_on_line'] = debug_backtrace()[0]['line'];
-        $fields['file_where_calling'] = debug_backtrace()[0]['file'];
+        $backtrace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0];
+        $fields['calling_on_line'] = $backtrace['line'];
+        $fields['file_where_calling'] = $backtrace['file'];
         return $this->requestToApp($fields, 'warn');
     }
 
