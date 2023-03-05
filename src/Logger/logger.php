@@ -11,7 +11,6 @@ class Handler
 {
     public string $token;
     public string $url;
-    public string $wrap = 'data';
 
     public function __construct(string $token, string $url)
     {
@@ -101,11 +100,7 @@ class Handler
             return $this->objectInfo($data);
         }
 
-        if ($this->wrap === '') {
-            return [$data];
-        }
-
-        return [$this->wrap => $data];
+        return ['data' => $data];
     }
 
     /**
